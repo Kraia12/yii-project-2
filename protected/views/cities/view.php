@@ -1,32 +1,36 @@
 <?php
-/* @var $this CitiesController */
-/* @var $model Cities */
+include_once 'ArrayDataProvider.php';
 
 $this->breadcrumbs=array(
-	'Cities'=>array('index'),
-	$model->name,
-);
-
-$this->menu=array(
-	array('label'=>'List Cities', 'url'=>array('index')),
-	array('label'=>'Create Cities', 'url'=>array('create')),
-	array('label'=>'Update Cities', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Cities', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cities', 'url'=>array('admin')),
+'Regiones' =>array('countries/regions'),
+ucwords(str_replace('-',' ',$region))=>array('/regiones/'. $region ),
+ucwords(str_replace('-',' ',$city)),
 );
 ?>
-
-<h1>View Cities #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'country_id',
-		'region_id',
-		'url',
-		'name',
-		'latitude',
-		'longitude',
-	),
-)); ?>
+<article class="col-1 box latest-news">
+	    <div class="left-top-corner maxheight">
+        	<div class="right-top-corner maxheight">
+        	    <div class="inner">
+                	<h2><span>Trabajos</span> de <?php echo $city ?></h2>
+<?php
+$viewData['dataProvider'] = new ArrayDataProvider(
+                        $jobs,
+                        array(
+                                'totalItemCount' => $total,
+                                'pagination'=>array(
+                                        'pageSize' => 10,
+                                ),
+                        )
+                );
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider'=>$viewData['dataProvider'],
+    'itemView'=>'/cities/_jobView',
+    'separator' => '<hr />',
+    'afterAjaxUpdate' => 'function(){
+$("html, body").animate({scrollTop: $(".latest-news").position().top }, 500);}'
+));
+?>
+				</div>
+			</div>
+		</div>
+</article>

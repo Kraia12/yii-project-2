@@ -6,7 +6,7 @@
 <ul class="view">
 <?php foreach($data as $region): ?>
 	<li>
-	<?php echo CHtml::link(CHtml::encode($region->name), array('regions/view','name'=>$region->url)); ?>
+	<?php echo CHtml::link(CHtml::encode($region->name), array('regions/view','region'=>$region->url)); ?>
 	</li>
 <? endforeach; ?>
 </ul>

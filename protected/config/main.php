@@ -38,20 +38,17 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
-			//	'http://www.<id:\w+>.trabajorecepcionista.com/regiones'=>'countries/regions',
 				'contacto' => 'site/contact',
 			//	'recursos' => array('site/page','defaultParams' => array('view' => 'learning')),
-				'http://www.<id:\w+>.trabajorecepcionista.com/' => 'countries/index',
-				'http://www.<id:\w+>.trabajorecepcionista.com/regiones' => 'countries/regions',
-				'http://www.<id:\w+>.trabajorecepcionista.com/regiones/<name:\w+>' => 'regions/view',
+				'http://www.<id:\w+>.trabajorecepcion.com/' => 'countries/index',
+				'http://www.<id:\w+>.trabajorecepcion.com/regiones' => 'countries/regions',
+				'http://www.<id:\w+>.trabajorecepcion.com/regiones/<region>' => 'regions/view',
+				'http://www.<id:\w+>.trabajorecepcion.com/regiones/<region>/<city>' => 'cities/view',
 				''=>'countries/index',
 				'regiones' => 'countries/regions',
-				'regiones/<name:\w+>' => 'regions/view',
-				'regiones/<name:\w+>/<city:\w+>' => 'regions/cities',
-				//'<controller:\w+>/<id:\w+>'=>'<controller>/view',
-				//'<controller:\w+>/<action:\w+>/<id:\w+>'=>'<controller>/<action>',
-				//'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-				
+				'regiones/<region>' => 'regions/view',
+				'regiones/<region>/<city>' => 'cities/view',
+
 			),
 			'showScriptName' =>false,
 		),

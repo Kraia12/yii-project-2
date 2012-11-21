@@ -16,10 +16,10 @@ class IndeedFeed extends CFormModel
         const SORT = '';
 
 
-        public function getFeed($start=0,$city='',$state='',$jobType='',$country='mx')
+        public function getFeed($start=0,$country='mx',$city='',$state='',$jobType='')
         {
                 // http://api.indeed.com/ads/apisearch?publisher=4590579897253855&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2
-                        $url = $this->getUrl($city,$state,$country='mx',$jobType='',$start);
+                        $url = $this->getUrl($city,$state,$country,$jobType='',$start);
                         $urlData = $this->downloadFeed($url);
                         $xml = new SimpleXMLElement($urlData);
                         $feed = $this->xmlToArray($xml);
@@ -27,14 +27,16 @@ class IndeedFeed extends CFormModel
 
         }
 
-        public function getUrl($city='',$state='',$country='mx',$jobType='',$start=0)
+        public function getUrl($city='',$state='',$country,$jobType='',$start=0)
         {
                 $location = '';
                 if($city !== ''){
+                        $city = str_replace('-',' ',$city);
                         $city = urlencode($city);
                         $location = $city;
                 }
                 if($state !== ''){
+                        $state = str_replace('-',' ',$state);
                         $state = urlencode($state);
                         $location = $state;
                 }

@@ -28,9 +28,9 @@
             <div class="nav-box">
                 <nav>
                     <ul class="fright">
-                        <li><a href="index.html"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-home-act.gif"></a></li>
-                        <li><a href="contact-us.html"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-mail.gif"></a></li>
-                        <li><a href="sitemap.html"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-sitemap.gif"></a></li>
+                        <li><a href="/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-home-act.gif"></a></li>
+                        <li><a href="contacto"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-mail.gif"></a></li>
+                        <li><a href="sitemap.xml"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pic-sitemap.gif"></a></li>
                     </ul>
         <?php $this->widget('zii.widgets.CMenu',array(
             'items'=>array(
@@ -42,18 +42,21 @@
         )); ?>
                 </nav>
             </div>
-            <div id="banner-top">
-                <img style="margin-top:20px;  " src="http://dummyimage.com/728x90/cbcbcb/fff" />
-            </div>            
+                <?php if(isset($this->breadcrumbs)):?>
+<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+    'homeLink' => CHtml::link('Inicio', Yii::app()->homeUrl),
+'links'=>$this->breadcrumbs,
+)); ?><!-- breadcrumbs -->
+<?php endif?>
+
         </header>
         <div class="wrapper indent">
 <!-- content -->
+
             <section id="content">
-                
-                <div class="inside">
-                    <h2><span>Bienvenid@</span> a Trabajo de Recepcionista!</h2>
-                    <p><b>BizSolutions</b> is a free web template created by TemplateMonster.com team. This website template is optimized for 1024X768 screen resolution and can be delivered in two packages - with PSD source files included and without them. It has several pages: <a href="index.html">Home</a>, <a href="about-us.html">About</a>, <a href="articles.html">Articles</a> (with Article page), <a href="contact-us.html">Contacts</a> (note that contact us form – doesn’t work), <a href="sitemap.html">Site Map.</a></p>
-                </div>
+                            <div id="banner-top">
+                <img src="http://dummyimage.com/728x90/cbcbcb/fff" />
+            </div>
                 <div class="wrapper">
                     <?php echo $content ?>
                 </div>
@@ -62,11 +65,13 @@
             <aside>
                 <div class="inside">
                     <div id="banner-aside">
-                        <img style="margin-left:20px;  " src="http://dummyimage.com/160x600/cbcbcb/fff" />
+                        <img src="http://dummyimage.com/160x600/cbcbcb/fff" />
                     </div>
-                    <div class="wrapper"><a href="#" class="link1"><span><span>More Services</span></span></a></div>
                 </div>
             </aside>
+                    <div id="banner-bot">
+            <img src="http://dummyimage.com/728x90/cbcbcb/fff" />
+        </div>
         </div>
 <!-- footer -->
         <footer>
@@ -75,7 +80,5 @@
         </footer>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/maxheight.js"></script>
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/script.js"></script>
 </body>
 </html>

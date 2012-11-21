@@ -6,7 +6,7 @@ class CountriesController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/column1';
 
 	/**
 	 * Displays a particular model.
@@ -26,17 +26,19 @@ class CountriesController extends Controller
 	{
                 // renders the view file 'protected/views/site/index.php'
                 // using the default layout 'protected/views/layouts/main.php'
+                $country = $this->loadModel($id);
                 $feed = new IndeedFeed;
                 $start = 0;
                 if($page > 0){
                         $start = ($page * 10) -10;
                 }
-                $jobs = $feed->getFeed($start);
+                $jobs = $feed->getFeed($start,$id);
                 $total = 200;
                 array_splice($jobs,0,1);
                 $this->render('index',array(
                                 'jobs' => $jobs,
                                 'total' => $total,
+                                'country' => $country,
                         ));
 	}
 
