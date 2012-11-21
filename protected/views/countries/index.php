@@ -1,20 +1,38 @@
 <?php
-/* @var $this CountriesController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $this SiteController */
 
-$this->breadcrumbs=array(
-	'Countries',
-);
-
-$this->menu=array(
-	array('label'=>'Create Countries', 'url'=>array('create')),
-	array('label'=>'Manage Countries', 'url'=>array('admin')),
-);
+$this->pageTitle=Yii::app()->name;
 ?>
+<h1>Trabajos recientes</h1>
+<p>Selecciona tu <?php echo CHtml::link("Estado",array('countries/regions'),array('target'=>'_blank')); ?> y despues tu ciudad para ver los trabajos en tu localidad</p>
+<?php
 
-<h1>Countries</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+include_once 'ArrayDataProvider.php';
+?>
+<article class="col-1 box latest-news">
+	    <div class="left-top-corner maxheight">
+        	<div class="right-top-corner maxheight">
+        	    <div class="inner">
+                	<h2><span>Ultimos</span> Trabajos</h2>
+<?php
+$viewData['dataProvider'] = new ArrayDataProvider(
+                        $jobs,
+                        array(
+                                'totalItemCount' => $total,
+                                'pagination'=>array(
+                                        'pageSize' => 10,
+                                ),
+                        )
+                );
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider'=>$viewData['dataProvider'],
+    'itemView'=>'/cities/_view',
+    'separator' => '<hr />',
+    'afterAjaxUpdate' => 'function(){
+$("html, body").animate({scrollTop: $(".latest-news").position().top }, 500);}'
+));
+?>
+				</div>
+			</div>
+		</div>
+</article>

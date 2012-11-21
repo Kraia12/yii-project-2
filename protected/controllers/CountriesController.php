@@ -12,7 +12,7 @@ class CountriesController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionRegions($id)
+	public function actionRegions($id='mx')
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
@@ -22,15 +22,22 @@ class CountriesController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($page=0,$id='mx')
 	{
-		/* TODO
-			Listar las feeds del pais
-		 */
-		$dataProvider=new CActiveDataProvider('Countries');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+                // renders the view file 'protected/views/site/index.php'
+                // using the default layout 'protected/views/layouts/main.php'
+                $feed = new IndeedFeed;
+                $start = 0;
+                if($page > 0){
+                        $start = ($page * 10) -10;
+                }
+                $jobs = $feed->getFeed($start);
+                $total = 200;
+                array_splice($jobs,0,1);
+                $this->render('index',array(
+                                'jobs' => $jobs,
+                                'total' => $total,
+                        ));
 	}
 
 	/**

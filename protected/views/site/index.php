@@ -3,18 +3,38 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
+<?php
+/* @var $this SiteController */
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+$this->pageTitle=Yii::app()->name;
+?>
+<h1>Trabajos recientes</h1>
+<p>Selecciona tu <?php echo CHtml::link("Estado",array('countries/regions'),array('target'=>'_blank')); ?> y despues tu ciudad para ver los trabajos en tu localidad</p>
+<?php
 
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+include_once 'ArrayDataProvider.php';
+?>
+<article class="col-1 box latest-news">
+	    <div class="left-top-corner maxheight">
+        	<div class="right-top-corner maxheight">
+        	    <div class="inner">
+                	<h2><span>Ultimos</span> Trabajos</h2>
+<?php
+$viewData['dataProvider'] = new ArrayDataProvider(
+                        $jobs,
+                        array(
+                                'totalItemCount' => $total,
+                                'pagination'=>array(
+                                        'pageSize' => 10,
+                                ),
+                        )
+                );
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider'=>$viewData['dataProvider'],
+    'itemView'=>'/cities/_view',
+));
+?>
+				</div>
+			</div>
+		</div>
+</article>

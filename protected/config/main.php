@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
-
+	'sourceLanguage' => 'es',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -38,13 +38,20 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
-				'http://www.trabajorecepcion.com/'=>'site/index',
-				'http://<id:\w+>.trabajorecepcion.com/' => 'countries/index',
-				'http://<id:\w+>.trabajorecepcion.com/regiones' => 'countries/regions',
-				'<controller:\w+>/<id:\w+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\w+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-				''=>'site/index',
+			//	'http://www.<id:\w+>.trabajorecepcionista.com/regiones'=>'countries/regions',
+				'contacto' => 'site/contact',
+			//	'recursos' => array('site/page','defaultParams' => array('view' => 'learning')),
+				'http://www.<id:\w+>.trabajorecepcionista.com/' => 'countries/index',
+				'http://www.<id:\w+>.trabajorecepcionista.com/regiones' => 'countries/regions',
+				'http://www.<id:\w+>.trabajorecepcionista.com/regiones/<name:\w+>' => 'regions/view',
+				''=>'countries/index',
+				'regiones' => 'countries/regions',
+				'regiones/<name:\w+>' => 'regions/view',
+				'regiones/<name:\w+>/<city:\w+>' => 'regions/cities',
+				//'<controller:\w+>/<id:\w+>'=>'<controller>/view',
+				//'<controller:\w+>/<action:\w+>/<id:\w+>'=>'<controller>/<action>',
+				//'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				
 			),
 			'showScriptName' =>false,
 		),

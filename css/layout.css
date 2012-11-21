@@ -1,1 +1,6 @@
-/* Styles handled by style.css and mixins.css */
+/* index.html */
+#page1 #content .col-1 {margin-right:19px}
+
+/* index-1.html */
+#page2 #content .col-1 {width:360px;margin-right:19px}
+#page2 #content .col-2 {width:360px}
